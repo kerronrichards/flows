@@ -3,41 +3,41 @@ flowchart TD
   subgraph R[Reviewer]
     R1[Request case for review in TQRS]
     R2[Open case and verify key info in TM Exam]
-    R3{Withdrawn for other review?}
+    R3{Withdrawn for other review}
     R4[Remove from docket and notify manager]
     R5[Companion case check using XSearch and companion spreadsheet]
-    R6{Related or previously reviewed companion with shared issues?}
+    R6{Related or previously reviewed companion with shared issues}
     R7[Remove from docket and notify manager]
-    R8[Log serial in FirstFNPubSOU tracking spreadsheet — final action tab]
-    R9[Review entire case file: application, specimens, actions, notes]
+    R8[Log serial in FirstFNPubSOU tracking spreadsheet final action tab]
+    R9[Review entire case file including application specimens actions notes]
     R10[Check for search of record and adequacy in XSearch]
-    R11[If no or deficient, perform supplemental search and note findings]
-    R12[Verify final action was proper and not premature or procedurally incorrect]
-    R13[Evaluate office action: missed issues, unsound or unnecessary issues, deficiencies]
+    R11[If absent or deficient perform supplemental search and note findings]
+    R12[Verify final action is proper and not premature or procedurally incorrect]
+    R13[Evaluate office action for missed issues unsound or unnecessary issues and other deficiencies]
     R14[Confirm applicant arguments were fully addressed]
     R15[Evaluate sufficiency of evidence]
-    R16[Complete TQRS form: enter findings and rate writing, evidence, missed issues, statutory errors, search]
-    R17[Confirm EA name and issuing office are correct in TQRS header]
-    R18{Any substantive refusal or disclaimer rated missed or unsound?}
-    R19[Consult monthly panel of 3 reviewers]
-    R20{Panel unanimous on missed or unsound?}
-    R21{Is the issue a 2d or a disclaimer?}
-    R22[Obtain manager sign-off for these issues]
+    R16[Complete TQRS form and rate writing evidence missed issues statutory errors and search]
+    R17[Confirm examining attorney name and issuing office are correct in TQRS header]
+    R18{Is any substantive refusal or disclaimer rated missed or unsound}
+    R19[Consult monthly panel of three reviewers]
+    R20{Did the panel agree that it is missed or unsound}
+    R21{Is the issue a 2d refusal or a disclaimer}
+    R22[Obtain manager sign off for these issues]
     R23[Update TQRS form to reflect consultation outcome]
-    R24{Are findings required? (missed/substantive, deficiencies, or search issues)}
+    R24{Are findings required based on missed or unsound issues or deficiencies or search issues}
     R25[Draft findings email using TQRS text and send from TQR mailbox]
-    R26[Address findings to the supervising Law Office management]
+    R26[Address findings to supervising Law Office management]
     R27[Submit final review in TQRS]
   end
 
   subgraph S[Systems]
-    S1[(TQRS assigns case at random from eligible final actions)]
+    S1[(TQRS assigns final action case at random)]
     S2[(TM Exam record)]
     S3[(XSearch database)]
   end
 
   subgraph M[Manager]
-    M1[Manager sign-off required after panel when issue is 2d or disclaimer]
+    M1[Manager sign off required after panel when issue is 2d or disclaimer]
   end
 
   subgraph L[Law Office]
@@ -66,7 +66,7 @@ flowchart TD
   R24 -->|Yes| R25 --> L1 --> R27
   R24 -->|No| R27
 
-  %% System references (dotted uses)
+  %% System references
   R2 -.uses .-> S2
   R5 -.uses .-> S3
   R10 -.uses .-> S3
