@@ -1,0 +1,57 @@
+flowchart TD
+  %% Swimlanes as subgraphs
+  subgraph R[Reviewer]
+    R1[Login to TQRS and request case]
+    R2[Verify eligibility: within 2 months, EA/Law Office correct, not withdrawn]
+    R3[Check for companion cases using XSearch and spreadsheet]
+    R4[Log serial number in tracking spreadsheet]
+    R5[Review full file in TM Exam]
+    R6[Check search adequacy in XSearch]
+    R7[Review office action and evidence: issues, refusals, writing quality]
+    R8[Draft ratings in TQRS: Writing, Statutory, Search, Evidence]
+    R9{Substantive issue missed or unsound?}
+    R10[Consult panel of 3 reviewers]
+    R11{Panel agrees it is missed or unsound?}
+    R12[Finalize ratings in TQRS]
+    R13{Is a findings email required?}
+    R14[Draft findings email using template, send from TQR mailbox]
+    R15[Submit case review in TQRS]
+    R16[File findings email in Outlook folder]
+  end
+
+  subgraph S[Systems]
+    S1[(TQRS assigns case)]
+    S2[(TM Exam record)]
+    S3[(XSearch database)]
+  end
+
+  subgraph M[Manager]
+    M1[Manager approval required for 2d or disclaimer issues]
+  end
+
+  subgraph L[Law Office]
+    L1[Law Office management receives findings email]
+  end
+
+  %% Flow
+  R1 --> S1 --> R2
+  R2 -->|Ineligible| R17[Remove from docket and notify manager] --> XEND[End]
+  R2 -->|Eligible| R3
+  R3 -->|Companion case conflict| R18[Remove from docket and notify manager] --> XEND
+  R3 -->|No conflict| R4 --> R5 --> R6 --> R7 --> R8
+
+  R8 --> R9
+  R9 -->|Yes| R10 --> R11
+  R11 -->|No| R12
+  R11 -->|Yes| R19{Is it 2d or disclaimer?}
+  R19 -->|No| R12
+  R19 -->|Yes| M1 --> R12
+
+  R12 --> R13
+  R13 -->|Yes| R14 --> L1 --> R15
+  R13 -->|No| R15
+  R15 --> R16 --> XEND
+
+  %% System references
+  R5 -.uses .-> S2
+  R6 -.uses .-> S3
