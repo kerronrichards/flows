@@ -1,0 +1,45 @@
+flowchart TD
+  %% Swimlanes
+  subgraph R[Program Analyst / Reviewer]
+    R1[Login to EOG and open assigned OG records]
+    R2[Review record for mark description drawing code entity ownership disclaimers]
+    R3{Error found}
+    R4[Open Query Screen select nature class grounds enter query text and submit]
+    R5[Proceed to next record until assignment complete]
+  end
+
+  subgraph S[Supervisor / Heather]
+    S1[Run canned searches in XSearch for common errors]
+    S2[Compile blemish report spreadsheet]
+    S3[Distribute blemish report with weekly assignments]
+    S4[Perform QA check on analyst queries and random records]
+    S5[Handle appeals from law offices by verifying queries and responding]
+    S6[Enter record counts in assignment spreadsheet auto-assign 1100 cases each rotate weekly]
+    S7[Track workload and productivity using formulas]
+  end
+
+  subgraph M[Management Team]
+    M1[Optionally review for substantive issues such as Section 2a or disclaimers]
+  end
+
+  subgraph L[Law Office]
+    L1[Email appeals regarding specific queries]
+  end
+
+  %% Flow
+  S1 --> S2 --> S3 --> R1
+  R1 --> R2 --> R3
+  R3 -->|Yes| R4 --> R5
+  R3 -->|No| R5
+  R5 --> S4
+
+  %% QA and appeals
+  S4 --> S5
+  L1 --> S5
+
+  %% Assignment and tracking
+  S6 --> R1
+  S7 --> S4
+
+  %% Management parallel review
+  M1 -.parallel review.-> R2
