@@ -1,0 +1,52 @@
+flowchart TD
+  %% Swimlanes as subgraphs
+  subgraph R[Reviewer Managing Attorney]
+    R1[Login to TQRS and open writing review tab]
+    R2[Select reviewee review type and time period]
+    R3[Receive random case assignment from TQRS]
+    R4[Open office action and record in TM Exam and read record]
+    R5{Is review type approved for pub}
+    R6[Skip writing scoring for approved for pub]
+    R7[Score writing on one to five scale]
+    R8[Score statutory practice and procedure on one to five scale]
+    R9[Mark search as sufficient or deficient]
+    R10[Mark evidence issues yes or no]
+    R11[Enter narrative feedback and justification in TQRS]
+    R12[Call out good writing and areas for improvement]
+    R13[Link to examples or templates if helpful]
+    R14[Prepare classification of findings as error or advisory if applicable]
+    R15{Discussion or escalation needed}
+    R16[Discuss with examining attorney or escalate to manager]
+    R17[Submit scores and feedback in TQRS]
+    R18[Update status to completed]
+  end
+
+  subgraph S[Systems]
+    S1[(TQRS random case selection)]
+    S2[(TM Exam record)]
+    S3[(TEPT posting for examiner)]
+  end
+
+  subgraph M[Law Office Manager]
+    M1[Review and classify findings as error or advisory when needed]
+  end
+
+  subgraph E[Examining Attorney]
+    E1[Views completed review in TEPT]
+  end
+
+  %% Main flow
+  R1 --> R2 --> S1 --> R3 --> R4
+  R4 -.uses .-> S2
+  R4 --> R5
+  R5 -->|Yes| R6 --> R8
+  R5 -->|No| R7 --> R8
+  R8 --> R9 --> R10 --> R11 --> R12 --> R13 --> R14
+
+  %% Escalation
+  R14 --> R15
+  R15 -->|Yes| R16 --> M1 --> R17
+  R15 -->|No| R17
+
+  %% Submission and posting
+  R17 --> R18 --> S3 --> E1
